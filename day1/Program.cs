@@ -13,6 +13,7 @@ namespace day1
             int i = 0;
             bool frequencyRepeated = false;
             List<int> frequencies = new List<int>();
+
             while (!frequencyRepeated) {
                 sum += Int32.Parse(lines[i]);
                 if (frequencies.Contains(sum))
