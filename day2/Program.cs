@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace day2
 {
@@ -24,8 +25,47 @@ namespace day2
             }
             Console.WriteLine(hastwo * hasthree);
             Console.ReadKey();
+
+            Console.WriteLine(findBoxesString(lines));
+            Console.ReadKey();
  
         }
+
+        private static string findBoxesString(string[] lines)
+        {
+            string result = "";
+
+            StringBuilder sb = new StringBuilder();
+            int diffCounter = 0;
+
+            for (int i = 0; i < lines.Length; i++) {
+                for (int j = i+1; j < lines.Length; j++) {
+                    if (i == j) continue;
+                    for (int k = 0; k < lines[j].Length; k++) {
+                        if (lines[i][k] == lines[j][k])
+                        {
+                            sb.Append(lines[i][k]);
+                        }
+                        else {
+                            if (++diffCounter > 1)
+                            {
+                                sb.Clear();
+                                diffCounter = 0;
+                                break;
+                            }
+                        }
+                    }
+                    if (sb.ToString().Length == lines[i].Length - 1)
+                    {
+                        result = sb.ToString();
+                    }
+                }
+            }
+
+
+            return result;
+        }
+
         public static string[] readSequence(string filename)
         {
             string[] lines = System.IO.File.ReadAllLines(@".\" + filename);
